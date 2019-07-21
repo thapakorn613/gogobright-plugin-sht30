@@ -162,6 +162,7 @@ void SENSOR_SHT30::process(Driver *drv)
             // cTemp = 0;
             // if (status_sht30 == ESP_OK)
             // {
+            // temperature = 78;
             temperature = (((((data_sht30[0] * 256.0) + data_sht30[1]) * 175) / 65535.0) - 45);
             // temperature = raw_data[0];
             // humidity = 67;
@@ -204,7 +205,9 @@ void SENSOR_SHT30::process(Driver *drv)
 
     case s_wait:
         // wait polling_ms timeout
-        if (is_tickcnt_elapsed(tickcnt, polling_ms))
+        // i2c->write(channel, SENSOR_SHT30_I2C_ADDRESS, measureCmd, 2);
+
+        if (is_tickcnt_elapsed(tickcnt, polling_ms)) // polling_ms 
         {
             state = s_detect;
         }
